@@ -1,0 +1,23 @@
+{
+  "name": "book-heaven",
+  "version": "1.0.0",
+  "description": "Nestled in the heart of downtown, \"The Book Heaven\" is a cozy haven for book lovers of all ages. This charming independent bookstore offers a curated selection of literature, spanning from timeless classics to contemporary bestsellers, as well as a diverse range of genres including fiction, non-fiction, mystery, science fiction, and fantasy. The warm, inviting atmosphere, complete with comfy reading nooks and the aroma of freshly brewed coffee from the in-house café, makes it the perfect spot to get lost in a good book. Knowledgeable staff are always on hand to offer personalized recommendations, ensuring every visitor finds their next great read. Regular author events, book signings, and reading groups foster a vibrant literary community, making The Book Heaven more than just a store – it's a gathering place for bibliophiles and a hub of literary culture.",
+  "main": "server.js",
+  "author": "Saiful Islam",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.1"
+  }
+}
