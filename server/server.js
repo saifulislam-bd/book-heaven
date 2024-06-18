@@ -11,10 +11,11 @@ dbConnect();
 
 const PORT = process.env.PORT || 8080;
 
+// middlewares
 app.use(express.json());
 app.use(cors());
 
 //server listen
 app.listen(PORT, () => {
-  console.log(`Server is listening on PORT ${PORT}`);
+  console.log(`Server is listening on port:${PORT}`);
 });
