@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const createUser = async (req, res) => {
   try {
@@ -44,6 +45,41 @@ export const createUser = async (req, res) => {
     return res
       .status(201)
       .json({ message: "User created successfully", newUser });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const loginUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    //check existing user
+    const existingUser = await User.findOne({ username });
+    if (!existingUser) res.status(404).json({ message: "Invalid credential" });
+
+    // password matching
+    await bcrypt.compare(password, existingUser.password, (err, data) => {
+      if (data) {
+        const authClaims = [
+          { name: existingUser.username, role: existingUser.role },
+        ];
+        //create jwt token
+        const token = jwt.sign({ authClaims }, process.env.JWT_SECRET, {
+          expiresIn: "7d",
+        });
+        if (!token) {
+          res
+            .status(400)
+            .json({ message: "Token expired, Please login again." });
+        }
+        res
+          .status(200)
+          .json({ id: existingUser._id, role: existingUser.role, token });
+      } else {
+        res.status(400).json({ message: "Invalid credential" });
+      }
+    });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
