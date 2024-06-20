@@ -91,11 +91,25 @@ export const loginUser = async (req, res) => {
 export const getUserInfo = async (req, res) => {
   try {
     const userId = req.params.id;
-    const userInfo = await User.findById(userId);
+    const userInfo = await User.findById(userId).select("-password");
     if (!userInfo) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(userInfo);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+//update address
+export const updateUserAddress = async (req, res) => {
+  try {
+    const { id } = req.headers;
+    const { address } = req.body;
+    await User.findByIdAndUpdate(id, { address: address }, { new: true });
+    return res
+      .status(200)
+      .json({ message: "User address updated successfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
