@@ -2,6 +2,7 @@ import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+// register user
 export const createUser = async (req, res) => {
   try {
     const { username, email, password, address } = req.body;
@@ -50,6 +51,7 @@ export const createUser = async (req, res) => {
   }
 };
 
+// login user
 export const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -80,6 +82,20 @@ export const loginUser = async (req, res) => {
         res.status(400).json({ message: "Invalid credential" });
       }
     });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// get user info
+export const getUserInfo = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const userInfo = await User.findById(userId);
+    if (!userInfo) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(userInfo);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
