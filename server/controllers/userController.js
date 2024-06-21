@@ -104,12 +104,16 @@ export const getUserInfo = async (req, res) => {
 //update address
 export const updateUserAddress = async (req, res) => {
   try {
-    const { id } = req.headers;
+    const { id } = req.params;
     const { address } = req.body;
-    await User.findByIdAndUpdate(id, { address: address }, { new: true });
+    const updateAddress = await User.findByIdAndUpdate(
+      id,
+      { address },
+      { new: true }
+    );
     return res
       .status(200)
-      .json({ message: "User address updated successfully" });
+      .json({ message: "User address updated successfully", updateAddress });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
