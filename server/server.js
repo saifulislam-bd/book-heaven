@@ -6,7 +6,8 @@ const app = express();
 
 import "dotenv/config";
 import dbConnect from "./config/dbConnect.js";
-import router from "./routes/userRoute.js";
+import userRouter from "./routes/userRoute.js";
+import bookRouter from "./routes/bookRoute.js";
 
 // db connection
 dbConnect();
@@ -18,7 +19,8 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use("/api/v1/user", router);
+app.use("/api/v1", userRouter);
+app.use("/api/v1", bookRouter);
 
 //server listen
 app.listen(PORT, () => {

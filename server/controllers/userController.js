@@ -104,7 +104,7 @@ export const getUserInfo = async (req, res) => {
 //update address
 export const updateUserAddress = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.headers;
     const { address } = req.body;
     const updateAddress = await User.findByIdAndUpdate(
       id,
