@@ -83,3 +83,14 @@ export const getRecentBooks = async (req, res) => {
     return res.status(500).json({ message: "An error occurred" });
   }
 };
+
+// get book by id
+export const getBookById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await Book.findById(id);
+    return res.json({ status: "Success", data: book });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
