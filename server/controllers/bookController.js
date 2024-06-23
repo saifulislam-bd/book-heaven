@@ -73,3 +73,13 @@ export const getAllBook = async (req, res) => {
     return res.status(500).json({ message: "An error occurred" });
   }
 };
+
+//get recently added books (limit:4)
+export const getRecentBooks = async (req, res) => {
+  try {
+    const books = await Book.find().sort({ createdAt: -1 }).limit(4);
+    return res.json({ status: "Success", data: books });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
