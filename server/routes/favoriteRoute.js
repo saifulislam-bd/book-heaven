@@ -3,6 +3,7 @@ const router = express.Router();
 import authenticateToken from "../utils/userAuth.js";
 import {
   addBookToFavorite,
+  getFavoriteBooks,
   removeBookFromFavorite,
 } from "../controllers/favoriteController.js";
 
@@ -12,5 +13,6 @@ router.delete(
   authenticateToken,
   removeBookFromFavorite
 );
+router.get("/get-favorite-books", authenticateToken, getFavoriteBooks);
 
 export default router;

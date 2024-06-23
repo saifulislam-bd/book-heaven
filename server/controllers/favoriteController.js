@@ -41,3 +41,18 @@ export const removeBookFromFavorite = async (req, res) => {
     return res.status(500).json({ message: "An error occurred" });
   }
 };
+
+//get fav books of a particular user
+export const getFavoriteBooks = async (req, res) => {
+  try {
+    const { id } = req.headers;
+    const userData = await User.findById(id).populate("favorites");
+    const favoriteBooks = userData.favorites;
+    return res.json({
+      status: "Success",
+      data: favoriteBooks,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
