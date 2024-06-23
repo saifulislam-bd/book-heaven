@@ -63,3 +63,13 @@ export const deleteBook = async (req, res) => {
     res.status(500).json({ message: "An error occurred" });
   }
 };
+
+// get all book
+export const getAllBook = async (req, res) => {
+  try {
+    const books = await Book.find().sort({ createdAt: -1 });
+    return res.json({ status: "Success", data: books });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
