@@ -8,6 +8,7 @@ import "dotenv/config";
 import dbConnect from "./config/dbConnect.js";
 import userRouter from "./routes/userRoute.js";
 import bookRouter from "./routes/bookRoute.js";
+import favoriteRouter from "./routes/favoriteRoute.js";
 
 // db connection
 dbConnect();
@@ -21,6 +22,7 @@ app.use(cors());
 
 app.use("/api/v1", userRouter);
 app.use("/api/v1", bookRouter);
+app.use("/api/v1", favoriteRouter);
 
 //server listen
 app.listen(PORT, () => {
