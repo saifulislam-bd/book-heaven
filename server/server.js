@@ -9,6 +9,7 @@ import dbConnect from "./config/dbConnect.js";
 import userRouter from "./routes/userRoute.js";
 import bookRouter from "./routes/bookRoute.js";
 import favoriteRouter from "./routes/favoriteRoute.js";
+import cartRouter from "./routes/cartRoute.js";
 
 // db connection
 dbConnect();
@@ -23,6 +24,7 @@ app.use(cors());
 app.use("/api/v1", userRouter);
 app.use("/api/v1", bookRouter);
 app.use("/api/v1", favoriteRouter);
+app.use("/api/v1", cartRouter);
 
 //server listen
 app.listen(PORT, () => {
