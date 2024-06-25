@@ -30,3 +30,18 @@ export const removeFromCart = async (req, res) => {
     return res.status(500).json({ message: "An error occurred" });
   }
 };
+
+// get cart of a particular user
+export const getUserCart = async (req, res) => {
+  try {
+    const { id } = req.headers;
+    const userData = await User.findById(id).populate("cart");
+    const cart = userData.cart.reverse();
+    return res.json({
+      status: "Success",
+      data: cart,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
