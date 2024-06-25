@@ -18,3 +18,15 @@ export const addToCart = async (req, res) => {
     return res.status(500).json({ message: "An error occurred" });
   }
 };
+
+// remove from cart
+export const removeFromCart = async (req, res) => {
+  try {
+    const { id } = req.headers;
+    const { bookid } = req.params;
+    await User.findByIdAndUpdate(id, { $pull: { cart: bookid } });
+    return res.json({ status: "Success", message: "Book removed from cart." });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
