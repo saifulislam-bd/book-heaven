@@ -1,5 +1,4 @@
 import Book from "../models/book.js";
-import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 // add book (admin)

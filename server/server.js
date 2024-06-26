@@ -10,6 +10,7 @@ import userRouter from "./routes/userRoute.js";
 import bookRouter from "./routes/bookRoute.js";
 import favoriteRouter from "./routes/favoriteRoute.js";
 import cartRouter from "./routes/cartRoute.js";
+import orderRouter from "./routes/orderRoute.js";
 
 // db connection
 dbConnect();
@@ -25,6 +26,7 @@ app.use("/api/v1", userRouter);
 app.use("/api/v1", bookRouter);
 app.use("/api/v1", favoriteRouter);
 app.use("/api/v1", cartRouter);
+app.use("/api/v1", orderRouter);
 
 //server listen
 app.listen(PORT, () => {
