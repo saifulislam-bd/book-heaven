@@ -62,3 +62,17 @@ export const getAllOrder = async (req, res) => {
     return res.status(500).json({ message: "An error occurred" });
   }
 };
+
+// update order (admin)
+export const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Order.findByIdAndUpdate(id, { status: req.body.status });
+    return res.json({
+      status: "Success",
+      message: "Status updated successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
