@@ -1,3 +1,6 @@
+import { Link, NavLink } from "react-router-dom";
+import { FaGripLines } from "react-icons/fa";
+
 const Navbar = () => {
   const links = [
     {
@@ -5,55 +8,65 @@ const Navbar = () => {
       title: "Home",
       link: "/",
     },
+    { id: 2, title: "All Book", link: "/all-book" },
     {
-      id: 2,
-      title: "About Us",
-      link: "/about-us",
-    },
-    { id: 3, title: "All Book", link: "/all-book" },
-    {
-      id: 4,
+      id: 3,
       title: "Cart",
       link: "/cart",
     },
     {
-      id: 5,
+      id: 4,
       title: "Profile",
       link: "/profile",
     },
   ];
 
   return (
-    <nav className="flex bg-zinc-800 text-white px-8 py-4 justify-between items-center">
-      <div className="flex items-center">
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/10433/10433049.png"
-          alt="logo"
-          className="h-10 me-4"
-        />
-        <h1 className="text-2xl font-semibold">BookHeaven</h1>
-      </div>
-      <div className="nav-links flex items-center gap-4">
-        <div className="flex items-center gap-4 cursor-pointer">
-          {links.map((item) => (
-            <div
-              key={item.id}
-              className="hover:text-blue-500 transition-all duration-300"
+    <>
+      <nav className="relative flex bg-zinc-800 text-white px-8 py-4 justify-between items-center z-20">
+        <div className="nav-links block md:flex items-center gap-4">
+          <div className="hidden md:flex gap-4">
+            {links.map((item) => (
+              <NavLink
+                to={item.link}
+                key={item.id}
+                className="text-white font-semibold text-4xl hover:text-blue-500 mb-8 transition-all duration-300"
+              >
+                {item.title}
+              </NavLink>
+            ))}
+          </div>
+          <div className="hidden md:flex gap-4">
+            <Link
+              to="/login"
+              className="px-4 py-1 border border-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
             >
-              {item.title}
-            </div>
-          ))}
-        </div>
-        <div className="flex gap-4">
-          <button className="px-2 py-1 border border-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300">
-            Log in
+              Log in
+            </Link>
+            <Link
+              to="/sign-up"
+              className="px-4 py-1 bg-blue-500  rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
+            >
+              Sign up
+            </Link>
+          </div>
+          <button className="text-white text-2xl hover:text-zinc-400">
+            <FaGripLines />
           </button>
-          <button className="px-2 py-1 bg-blue-500  rounded hover:bg-white hover:text-zinc-800 transition-all duration-300">
-            Sign up
-          </button>
         </div>
+      </nav>
+      <div className="absolute bg-zinc-800 h-screen top-0 left-0 w-full z-10 flex flex-col items-center justify-center">
+        {links.map((item) => (
+          <NavLink
+            to={item.link}
+            key={item.id}
+            className="text-white font-semibold text-4xl hover:text-blue-500 mb-8 transition-all duration-300"
+          >
+            {item.title}
+          </NavLink>
+        ))}
       </div>
-    </nav>
+    </>
   );
 };
 
